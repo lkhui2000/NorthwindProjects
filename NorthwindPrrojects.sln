@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36401.2 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerAPI", "CustomerAPI\CustomerAPI.csproj", "{3A6BC711-CB71-4785-9FF8-36D613E6EBA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorthwindDataStorage", "NorthwindDataStorage\NorthwindDataStorage.csproj", "{0F18C773-456A-43C9-9D5A-1E707C8129FC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3A6BC711-CB71-4785-9FF8-36D613E6EBA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A6BC711-CB71-4785-9FF8-36D613E6EBA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A6BC711-CB71-4785-9FF8-36D613E6EBA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A6BC711-CB71-4785-9FF8-36D613E6EBA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F18C773-456A-43C9-9D5A-1E707C8129FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F18C773-456A-43C9-9D5A-1E707C8129FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F18C773-456A-43C9-9D5A-1E707C8129FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F18C773-456A-43C9-9D5A-1E707C8129FC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {12FB1B70-DD2B-4DB7-813A-0AE2E9E82636}
+	EndGlobalSection
+EndGlobal
