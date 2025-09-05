@@ -1,0 +1,192 @@
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+  <edmx:DataServices>
+    <Schema Namespace="NorthwindDataStorage.Models" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <EntityType Name="Product">
+        <Key>
+          <PropertyRef Name="ProductId" />
+        </Key>
+        <Property Name="ProductId" Type="Edm.Int32" Nullable="false" />
+        <Property Name="ProductName" Type="Edm.String" Nullable="false" />
+        <Property Name="SupplierId" Type="Edm.Int32" />
+        <Property Name="CategoryId" Type="Edm.Int32" />
+        <Property Name="QuantityPerUnit" Type="Edm.String" />
+        <Property Name="UnitPrice" Type="Edm.Decimal" Scale="variable" />
+        <Property Name="UnitsInStock" Type="Edm.Int16" />
+        <Property Name="UnitsOnOrder" Type="Edm.Int16" />
+        <Property Name="ReorderLevel" Type="Edm.Int16" />
+        <Property Name="Discontinued" Type="Edm.Boolean" Nullable="false" />
+        <NavigationProperty Name="Category" Type="NorthwindDataStorage.Models.Category">
+          <ReferentialConstraint Property="CategoryId" ReferencedProperty="CategoryId" />
+        </NavigationProperty>
+        <NavigationProperty Name="OrderDetails" Type="Collection(NorthwindDataStorage.Models.OrderDetail)" />
+        <NavigationProperty Name="Supplier" Type="NorthwindDataStorage.Models.Supplier">
+          <ReferentialConstraint Property="SupplierId" ReferencedProperty="SupplierId" />
+        </NavigationProperty>
+      </EntityType>
+      <EntityType Name="Customer">
+        <Key>
+          <PropertyRef Name="CustomerId" />
+        </Key>
+        <Property Name="CustomerId" Type="Edm.String" Nullable="false" />
+        <Property Name="CompanyName" Type="Edm.String" Nullable="false" />
+        <Property Name="ContactName" Type="Edm.String" />
+        <Property Name="ContactTitle" Type="Edm.String" />
+        <Property Name="Address" Type="Edm.String" />
+        <Property Name="City" Type="Edm.String" />
+        <Property Name="Region" Type="Edm.String" />
+        <Property Name="PostalCode" Type="Edm.String" />
+        <Property Name="Country" Type="Edm.String" />
+        <Property Name="Phone" Type="Edm.String" />
+        <Property Name="Fax" Type="Edm.String" />
+        <NavigationProperty Name="Orders" Type="Collection(NorthwindDataStorage.Models.Order)" />
+        <NavigationProperty Name="CustomerTypes" Type="Collection(NorthwindDataStorage.Models.CustomerDemographic)" />
+      </EntityType>
+      <EntityType Name="Category">
+        <Key>
+          <PropertyRef Name="CategoryId" />
+        </Key>
+        <Property Name="CategoryId" Type="Edm.Int32" Nullable="false" />
+        <Property Name="CategoryName" Type="Edm.String" Nullable="false" />
+        <Property Name="Description" Type="Edm.String" />
+        <Property Name="Picture" Type="Edm.Binary" />
+        <NavigationProperty Name="Products" Type="Collection(NorthwindDataStorage.Models.Product)" />
+      </EntityType>
+      <EntityType Name="OrderDetail">
+        <Key>
+          <PropertyRef Name="OrderId" />
+          <PropertyRef Name="ProductId" />
+        </Key>
+        <Property Name="OrderId" Type="Edm.Int32" />
+        <Property Name="ProductId" Type="Edm.Int32" />
+        <Property Name="UnitPrice" Type="Edm.Decimal" Nullable="false" Scale="variable" />
+        <Property Name="Quantity" Type="Edm.Int16" Nullable="false" />
+        <Property Name="Discount" Type="Edm.Single" Nullable="false" />
+        <NavigationProperty Name="Order" Type="NorthwindDataStorage.Models.Order">
+          <ReferentialConstraint Property="OrderId" ReferencedProperty="OrderId" />
+        </NavigationProperty>
+        <NavigationProperty Name="Product" Type="NorthwindDataStorage.Models.Product">
+          <ReferentialConstraint Property="ProductId" ReferencedProperty="ProductId" />
+        </NavigationProperty>
+      </EntityType>
+      <EntityType Name="Order">
+        <Key>
+          <PropertyRef Name="OrderId" />
+        </Key>
+        <Property Name="OrderId" Type="Edm.Int32" Nullable="false" />
+        <Property Name="CustomerId" Type="Edm.String" />
+        <Property Name="EmployeeId" Type="Edm.Int32" />
+        <Property Name="OrderDate" Type="Edm.DateTimeOffset" />
+        <Property Name="RequiredDate" Type="Edm.DateTimeOffset" />
+        <Property Name="ShippedDate" Type="Edm.DateTimeOffset" />
+        <Property Name="ShipVia" Type="Edm.Int32" />
+        <Property Name="Freight" Type="Edm.Decimal" Scale="variable" />
+        <Property Name="ShipName" Type="Edm.String" />
+        <Property Name="ShipAddress" Type="Edm.String" />
+        <Property Name="ShipCity" Type="Edm.String" />
+        <Property Name="ShipRegion" Type="Edm.String" />
+        <Property Name="ShipPostalCode" Type="Edm.String" />
+        <Property Name="ShipCountry" Type="Edm.String" />
+        <NavigationProperty Name="Customer" Type="NorthwindDataStorage.Models.Customer">
+          <ReferentialConstraint Property="CustomerId" ReferencedProperty="CustomerId" />
+        </NavigationProperty>
+        <NavigationProperty Name="Employee" Type="NorthwindDataStorage.Models.Employee">
+          <ReferentialConstraint Property="EmployeeId" ReferencedProperty="EmployeeId" />
+        </NavigationProperty>
+        <NavigationProperty Name="OrderDetails" Type="Collection(NorthwindDataStorage.Models.OrderDetail)" />
+        <NavigationProperty Name="ShipViaNavigation" Type="NorthwindDataStorage.Models.Shipper">
+          <ReferentialConstraint Property="ShipVia" ReferencedProperty="ShipperId" />
+        </NavigationProperty>
+      </EntityType>
+      <EntityType Name="CustomerDemographic">
+        <Key>
+          <PropertyRef Name="CustomerTypeId" />
+        </Key>
+        <Property Name="CustomerTypeId" Type="Edm.String" Nullable="false" />
+        <Property Name="CustomerDesc" Type="Edm.String" />
+        <NavigationProperty Name="Customers" Type="Collection(NorthwindDataStorage.Models.Customer)" />
+      </EntityType>
+      <EntityType Name="Employee">
+        <Key>
+          <PropertyRef Name="EmployeeId" />
+        </Key>
+        <Property Name="EmployeeId" Type="Edm.Int32" Nullable="false" />
+        <Property Name="LastName" Type="Edm.String" Nullable="false" />
+        <Property Name="FirstName" Type="Edm.String" Nullable="false" />
+        <Property Name="Title" Type="Edm.String" />
+        <Property Name="TitleOfCourtesy" Type="Edm.String" />
+        <Property Name="BirthDate" Type="Edm.DateTimeOffset" />
+        <Property Name="HireDate" Type="Edm.DateTimeOffset" />
+        <Property Name="Address" Type="Edm.String" />
+        <Property Name="City" Type="Edm.String" />
+        <Property Name="Region" Type="Edm.String" />
+        <Property Name="PostalCode" Type="Edm.String" />
+        <Property Name="Country" Type="Edm.String" />
+        <Property Name="HomePhone" Type="Edm.String" />
+        <Property Name="Extension" Type="Edm.String" />
+        <Property Name="Photo" Type="Edm.Binary" />
+        <Property Name="Notes" Type="Edm.String" />
+        <Property Name="ReportsTo" Type="Edm.Int32" />
+        <Property Name="PhotoPath" Type="Edm.String" />
+        <NavigationProperty Name="InverseReportsToNavigation" Type="Collection(NorthwindDataStorage.Models.Employee)" />
+        <NavigationProperty Name="Orders" Type="Collection(NorthwindDataStorage.Models.Order)" />
+        <NavigationProperty Name="ReportsToNavigation" Type="NorthwindDataStorage.Models.Employee">
+          <ReferentialConstraint Property="ReportsTo" ReferencedProperty="EmployeeId" />
+        </NavigationProperty>
+        <NavigationProperty Name="Territories" Type="Collection(NorthwindDataStorage.Models.Territory)" />
+      </EntityType>
+      <EntityType Name="Territory">
+        <Key>
+          <PropertyRef Name="TerritoryId" />
+        </Key>
+        <Property Name="TerritoryId" Type="Edm.String" Nullable="false" />
+        <Property Name="TerritoryDescription" Type="Edm.String" Nullable="false" />
+        <Property Name="RegionId" Type="Edm.Int32" />
+        <NavigationProperty Name="Region" Type="NorthwindDataStorage.Models.Region">
+          <ReferentialConstraint Property="RegionId" ReferencedProperty="RegionId" />
+        </NavigationProperty>
+        <NavigationProperty Name="Employees" Type="Collection(NorthwindDataStorage.Models.Employee)" />
+      </EntityType>
+      <EntityType Name="Region">
+        <Key>
+          <PropertyRef Name="RegionId" />
+        </Key>
+        <Property Name="RegionId" Type="Edm.Int32" Nullable="false" />
+        <Property Name="RegionDescription" Type="Edm.String" Nullable="false" />
+        <NavigationProperty Name="Territories" Type="Collection(NorthwindDataStorage.Models.Territory)" />
+      </EntityType>
+      <EntityType Name="Shipper">
+        <Key>
+          <PropertyRef Name="ShipperId" />
+        </Key>
+        <Property Name="ShipperId" Type="Edm.Int32" Nullable="false" />
+        <Property Name="CompanyName" Type="Edm.String" Nullable="false" />
+        <Property Name="Phone" Type="Edm.String" />
+        <NavigationProperty Name="Orders" Type="Collection(NorthwindDataStorage.Models.Order)" />
+      </EntityType>
+      <EntityType Name="Supplier">
+        <Key>
+          <PropertyRef Name="SupplierId" />
+        </Key>
+        <Property Name="SupplierId" Type="Edm.Int32" Nullable="false" />
+        <Property Name="CompanyName" Type="Edm.String" Nullable="false" />
+        <Property Name="ContactName" Type="Edm.String" />
+        <Property Name="ContactTitle" Type="Edm.String" />
+        <Property Name="Address" Type="Edm.String" />
+        <Property Name="City" Type="Edm.String" />
+        <Property Name="Region" Type="Edm.String" />
+        <Property Name="PostalCode" Type="Edm.String" />
+        <Property Name="Country" Type="Edm.String" />
+        <Property Name="Phone" Type="Edm.String" />
+        <Property Name="Fax" Type="Edm.String" />
+        <Property Name="HomePage" Type="Edm.String" />
+        <NavigationProperty Name="Products" Type="Collection(NorthwindDataStorage.Models.Product)" />
+      </EntityType>
+    </Schema>
+    <Schema Namespace="Default" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+      <EntityContainer Name="Container">
+        <EntitySet Name="Customers" EntityType="NorthwindDataStorage.Models.Customer" />
+        <EntitySet Name="Products" EntityType="NorthwindDataStorage.Models.Product" />
+      </EntityContainer>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

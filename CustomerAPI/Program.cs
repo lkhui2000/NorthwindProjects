@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using CustomerAPI.Controllers;
-using NorthwindDataStorage.Models;
+//using NorthwindDataStorage.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,8 +12,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<NorthwindContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("NorthwindContext") ?? throw new InvalidOperationException("Connection string 'MyWebAppContext' not found.")));
+//builder.Services.AddDbContext<NorthwindContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("NorthwindContext") ?? throw new InvalidOperationException("Connection string 'MyWebAppContext' not found.")));
 
 var app = builder.Build();
 

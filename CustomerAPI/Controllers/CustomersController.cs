@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+/*
 using NorthwindDataStorage.Models;
 
 namespace CustomerAPI.Controllers
@@ -119,3 +120,4 @@ namespace CustomerAPI.Controllers
         }
     }
 }
+*/

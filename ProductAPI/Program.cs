@@ -23,9 +23,12 @@ builder.Services.AddControllers()
     .AddOData(options =>
     {
         var odataBuilder = new ODataConventionModelBuilder();
-        //odataBuilder.EntitySet<Customer>("Customers");
-        //odataBuilder.EntitySet<Order>("Orders");
-        //odataBuilder.EntitySet<Product>("Products");
+        odataBuilder.EntityType<Product>();
+        odataBuilder.EntityType<Customer>();
+
+        odataBuilder.EntitySet<Customer>("Customers");
+        odataBuilder.EntitySet<Product>("Products");
+
         options.Select().Filter().Expand().OrderBy().Count().SetMaxTop(100)
                .AddRouteComponents("odata", odataBuilder.GetEdmModel());
     });

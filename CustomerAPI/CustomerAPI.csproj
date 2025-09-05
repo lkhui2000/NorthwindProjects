@@ -9,23 +9,34 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Connected Services\OData Service\OData ServiceCsdl.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Connected Services\OData Service\OData ServiceCsdl.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.11">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.OData.Client" Version="8.3.0" />
+    <PackageReference Include="Microsoft.OData.Core" Version="8.3.0" />
+    <PackageReference Include="Microsoft.OData.Edm" Version="8.3.0" />
+    <PackageReference Include="Microsoft.Spatial" Version="8.3.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+    <PackageReference Include="System.Text.Json" Version="9.0.8" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Controllers\CustomersController.cs" />
     <None Include="efpt.config.json.user" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\NorthwindDataStorage\NorthwindDataStorage.csproj" />
   </ItemGroup>
 
 </Project>
