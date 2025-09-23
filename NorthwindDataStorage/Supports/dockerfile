@@ -1,0 +1,62 @@
+# Use the official Microsoft SQL Server 2022 for Linux image as the base.
+FROM mcr.microsoft.com/mssql/server:2022-latest
+
+# Set environment variables for SQL Server setup.
+# ACCEPT_EULA=Y is required to accept the end-user license agreement.
+# SA_PASSWORD is the password for the 'sa' user. Change this to a strong password.
+# MSSQL_PID=Developer specifies the free Developer edition.
+ENV ACCEPT_EULA=Y \
+    SA_PASSWORD="Password123" \
+    MSSQL_PID=Developer
+
+# Switch to the root user to install necessary tools.
+USER root
+
+# Install SQL Server command-line tools and curl.
+# sqlcmd is used to execute the SQL script.
+# curl is a general-purpose tool for downloading files, which you might need for more complex setups.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    lsb-release \
+    unixodbc-dev \
+    gcc \
+    build-essential \
+    libssl-dev \
+    libffi-dev \
+    libiodbc2 \
+    libgssapi-krb5-2 \
+    msodbcsql18 \
+    mssql-tools \
+    python3 \
+    python3-pip \
+    && rm -rf /var/lib/apt/lists/*
+
+
+
+# Add your initial setup script to the container.
+# This assumes your script is named 'setup.sql' and is in the same directory as the Dockerfile.
+COPY ./setup.sql /usr/src/app/setup.sql
+
+RUN chmod +x /usr/src/app/setup.sql
+RUN chmod +x /opt/mssql-tools/bin/sqlcmd
+
+# RUN "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P \$SA_PASSWORD -i /usr/src/app/setup.sql; "
+
+# Use the CMD instruction to run a series of commands sequentially.
+# - The first command waits for SQL Server to be ready.
+# - The second command executes your setup script.
+# - The final command, `/opt/mssql/bin/sqlservr`, is crucial. It keeps the SQL Server process running in the foreground,
+#   which prevents the container from immediately exiting after the script is finished.
+# CMD bash -c " \
+#     echo 'Waiting for SQL Server to start...' && \
+#     /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P \$SA_PASSWORD -Q \"SELECT 1\" > /dev/null 2>&1; \
+#     while [ \$? -ne 0 ]; \
+#     do \
+#         sleep 1; \
+#         echo 'SQL Server not ready, waiting...'; \
+#         /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P \$SA_PASSWORD -Q \"SELECT 1\" > /dev/null 2>&1; \
+#     done; \
+#     echo 'SQL Server is ready. Executing setup script...'; \
+#     /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P \$SA_PASSWORD -i /usr/src/app/setup.sql; \
+#     echo 'Setup script executed successfully!'; \
+#     /opt/mssql/bin/sqlservr"
